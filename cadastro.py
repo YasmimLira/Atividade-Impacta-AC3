@@ -24,15 +24,15 @@ def main():
 
 @app.route('/cadastrar', methods=["GET","POST"])
 def cadastrar():
-    _name = request.form['nome_aluno']
-    _email = request.form['email_aluno']
-    _endereco = request.form['endereco_aluno']
+    _nome = request.form['nom']
+    _categoria = request.form['categoria']
+    _preco = request.form['preco']
     if _name and _email and _endereco:
         conn = mysql.connect()
         cursor = conn.cursor()
 
-        sql = "INSERT INTO tbl_alunos(nome_aluno, email_aluno, endereco_aluno) VALUES (%s, %s, %s)"
-        value = (_name, _email, _endereco)
+        sql = "INSERT INTO tbl_alunos(nome, categoria, preco) VALUES (%s, %s, %s)"
+        value = (_nome, _categoria, _preco)
         cursor.execute(sql, value)
         conn.commit()
 
@@ -45,7 +45,7 @@ def listar():
     data = []
     conn = mysql.connect()
     cursor = conn.cursor()
-    sql = 'SELECT nome_aluno, email_aluno, endereco_aluno FROM tbl_alunos'
+    sql = 'SELECT nome, categoria, preco FROM tbl_produto'
     cursor.execute(sql)
     for usuario in cursor.fetchall():
         data.append(usuario)
